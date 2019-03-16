@@ -62,13 +62,13 @@ you can take a look at tests:
 
 <br/>
 
-For below configuration, check test file [here](TODO update link).
+For below configuration, check test file [here](https://github.com/omkarsheral1989/tslint-rules-line-before-tests/blob/master/tests/describe/bofore-describe-equals-2/before-describe-equals-2.test.ts.lint).
 ```
 "line-before-tests": [true, {beforeDescribe: 2, beforeIt: -1}]
 ```
 <br/>
 
-For below configuration, check test file [here](TODO update link).
+For below configuration, check test file [here](https://github.com/omkarsheral1989/tslint-rules-line-before-tests/blob/master/tests/it/before-it-equals-1/before-it-equals-1.test.ts.lint).
 ```
 "line-before-tests": [true, {beforeDescribe: -1, beforeIt: 1}]
 ```
