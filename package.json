@@ -1,6 +1,6 @@
 {
   "name": "tslint-rules-line-before-tests",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "description": "Custom rules for tslint around tests.",
   "main": "rules/index.js",
   "scripts": {

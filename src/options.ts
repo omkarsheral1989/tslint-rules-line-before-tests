@@ -1,9 +1,11 @@
 export interface IOptions {
   beforeDescribe: number;
+  beforeIt: number;
 }
 
 export const defaultOptions: IOptions = {
   beforeDescribe: 2,
+  beforeIt: 1,
 };
 
 /**
@@ -11,4 +13,5 @@ export const defaultOptions: IOptions = {
  */
 export function incrementOptionsNumbersBy1(options: IOptions) {
   options.beforeDescribe++;
+  options.beforeIt++;
 }

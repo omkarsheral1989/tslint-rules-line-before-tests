@@ -17,11 +17,13 @@ export class Rule extends Lint.Rules.AbstractRule {
     ruleName: 'line-before-tests',
     type: 'style',
     description: 'Checks there are blank lines before test cases.',
-    rationale: 'Consistent line spacing between test cases',
     descriptionDetails: 'TODO write detailed description',
-    options: null,
+    rationale: 'Consistent line spacing between test cases',
+    hasFix: true,
+    optionsDescription: 'TODO ',
+    options: 'TODO',
+    optionExamples: ['TODO'],
     requiresTypeInfo: false,
-    optionsDescription: 'Not configurable.',
     typescriptOnly: false,
   };
 
@@ -65,13 +67,14 @@ function walk(ctx: Lint.WalkContext<IOptions[]>) {
           completeLog('previous node kind', getSnytaxKindKeyFromValue(previousToken.kind));
 
           let noOfNewLineChars = countNoOfNewLineChars(node.getFullText(sourceFile));
-          console.log('no of chars', noOfNewLineChars);
-          if (noOfNewLineChars < options.beforeDescribe) {
+          const noOfNewLineCharsNeeded = getNoOfNewLineCharsNeededForTOI(node, sourceFile, options);
 
+          if (noOfNewLineChars < noOfNewLineCharsNeeded) {
             ctx.addFailureAtNode(
               node,
-              getFailureString(options.beforeDescribe),
-              fixAddNewLineChars(node, options.beforeDescribe - noOfNewLineChars));
+              getFailureString(node, sourceFile, options),
+              fixAddNewLineChars(node, noOfNewLineCharsNeeded - noOfNewLineChars)
+            );
           } else {
             // has at least 2 new lines before
           }
@@ -91,22 +94,29 @@ const fixAddNewLineChars = (node: ts.Node, noOfNewLineCharsToAdd): Lint.Fix =>
 function isThingOfImportanceTOI(node: ts.Node, sourceFile: ts.SourceFile): boolean {
   return (
     isDescribeIdentifier(node, sourceFile)
-    || isXDescribeIdentifier(node, sourceFile)
+    || isTestIdentifier(node, sourceFile)
   );
 }
 
 function isDescribeIdentifier(node: ts.Node, sourceFile: ts.SourceFile): boolean {
   return (
     node.kind === ts.SyntaxKind.Identifier
-    && node.getText(sourceFile) === 'describe'
+    && (
+      node.getText(sourceFile) === 'describe'
+      || node.getText(sourceFile) === 'xdescribe'
+    )
   );
-
 }
 
-function isXDescribeIdentifier(node: ts.Node, sourceFile: ts.SourceFile): boolean {
+function isTestIdentifier(node: ts.Node, sourceFile: ts.SourceFile): boolean {
   return (
     node.kind === ts.SyntaxKind.Identifier
-    && node.getText(sourceFile) === 'xdescribe'
+    && (
+      node.getText(sourceFile) === 'it'
+      || node.getText(sourceFile) === 'xit'
+      || node.getText(sourceFile) === 'test'
+      || node.getText(sourceFile) === 'xtest'
+    )
   );
 }
 
@@ -114,6 +124,18 @@ function isTOIFirstThingInFile(node: ts.Node, sourceFile: ts.SourceFile): boolea
   return !getPreviousToken(node, sourceFile);
 }
 
-function getFailureString(noOfLines: number) {
-  return `Should contain at least ${noOfLines - 1} blank lines before describe`;
+function getNoOfNewLineCharsNeededForTOI(node: ts.Node, sourceFile: ts.SourceFile, options: IOptions): number {
+  if (isDescribeIdentifier(node, sourceFile)) {
+    return options.beforeDescribe;
+  }
+  if (isTestIdentifier(node, sourceFile)) {
+    return options.beforeIt;
+  }
+  return 0;
+}
+
+function getFailureString(node: ts.Node, sourceFile: ts.SourceFile, options: IOptions) {
+  let noOfLines = getNoOfNewLineCharsNeededForTOI(node, sourceFile, options) - 1;
+  const TOIname = node.getText(sourceFile);
+  return `Should contain at least ${noOfLines} blank lines before ${TOIname}`;
 }

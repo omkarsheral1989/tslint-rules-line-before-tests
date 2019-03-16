@@ -64,8 +64,8 @@ describe.skip.each(table)(name, fn);
 ~~~~~~~~ [Should contain at least 2 blank lines before describe]
 
 xdescribe(name, fn);
-~~~~~~~~~ [Should contain at least 2 blank lines before describe]
+~~~~~~~~~ [Should contain at least 2 blank lines before xdescribe]
 
 xdescribe(name, () => {
-~~~~~~~~~ [Should contain at least 2 blank lines before describe]
+~~~~~~~~~ [Should contain at least 2 blank lines before xdescribe]
 });

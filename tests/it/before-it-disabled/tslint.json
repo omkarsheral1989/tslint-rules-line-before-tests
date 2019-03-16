@@ -6,7 +6,7 @@
     "line-before-tests": [
       true,
       {
-        "beforeDescribe": 2,
+        "beforeDescribe": -1,
         "beforeIt": -1
       }
     ]

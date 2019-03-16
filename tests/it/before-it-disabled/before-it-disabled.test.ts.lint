@@ -1,0 +1,87 @@
+it('i10', () => {
+});
+it('i2', () => {
+});
+
+it('i3', () => {
+});
+
+
+it('text in desc4', () => {
+});
+
+
+
+describe('text in desc5', () => {
+  it('text in desc4', fn);
+});
+
+
+describe('d6', () => {
+
+  it('d6.1', fn);
+
+  it('d6.2', fn);
+  it('d6.3', fn);
+
+  it('d6.3', fn);
+
+
+  describe('d6', () => {
+  });
+  it('d6.3', fn);
+
+
+  describe('d6', () => {
+  });
+
+  it('d6.3', fn);
+
+
+  describe('d6', () => {
+    it('d6.3', fn);
+
+    it('d6.3', () => {
+    });
+    it('d6.3', fn);
+
+    it('d6.3', fn);
+  });
+
+});
+
+
+describe('d7', () => {
+
+  it('6.1', () => {
+  });
+});
+
+it.only('d8', fn);
+it.only('d8', () => {
+});
+
+it.only('d8', fn);
+it.each(table)(name, fn, timeout);
+
+it.only.each(table)(name, fn);
+it.only.each(table)(name, () => {
+});
+
+it.skip(name, fn);
+it.skip.each(table)(name, fn);
+
+xit(name, fn);
+xit(name, () => {
+});
+
+test('', fn);
+test('', fn);
+test.only('', fn);
+test.skip('', fn);
+xtest('', fn);
+
+xtest('', fn);
+
+it('', fn);
+xtest('', fn);
