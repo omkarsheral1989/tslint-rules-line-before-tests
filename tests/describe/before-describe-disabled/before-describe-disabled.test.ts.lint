@@ -1,0 +1,58 @@
+describe('text in desc1', () => {
+});
+describe('text in desc2', () => {
+});
+
+describe('text in desc3', () => {
+});
+
+
+describe('text in desc4', () => {
+});
+
+
+
+describe('text in desc5', () => {
+
+  describe('d5.1', () => {
+  });
+});
+
+
+describe('text in desc5', () => {
+
+  describe('d5.1', () => {
+  });
+
+  describe('d5.1', () => {
+  });
+});
+
+
+
+
+describe('d6', () => {
+
+  it('6.1', () => {
+     expect(true).toEqual(true);
+  });
+});
+
+describe.only('d6', () => {
+});
+
+describe.each(table)(name, fn, timeout);
+
+describe.only(name, fn);
+
+describe.only.each(table)(name, () => {
+});
+
+describe.skip(name, fn);
+
+describe.skip.each(table)(name, fn);
+
+xdescribe(name, fn);
+
+xdescribe(name, () => {
+});

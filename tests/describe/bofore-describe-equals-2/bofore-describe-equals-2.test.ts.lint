@@ -24,12 +24,26 @@ describe('text in desc5', () => {
 
 describe('d6', () => {
 
+  describe('d6.1', fn);
+  ~~~~~~~~ [Should contain at least 2 blank lines before describe]
+
+  describe('d6.2', fn);
+  ~~~~~~~~ [Should contain at least 2 blank lines before describe]
+
+
+  describe('d6.3', fn);
+
+});
+
+
+describe('d7', () => {
+
   it('6.1', () => {
      expect(true).toEqual(true);
   });
 });
 
-describe.only('d6', () => {
+describe.only('d8', () => {
 ~~~~~~~~ [Should contain at least 2 blank lines before describe]
 });
 
