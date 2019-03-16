@@ -38,7 +38,7 @@ Takes optional object with following optional properties:
 
 ##### Config examples
 ```
-"line-before-tests": [true]
+"line-before-tests": true
 ```
 ```
 "line-before-tests": [true, {beforeDescribe: 2, beforeIt: 1}]
