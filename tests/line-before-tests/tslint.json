@@ -1,0 +1,6 @@
+{
+  "rulesDirectory": ["../../rules"],
+  "rules": {
+    "line-before-tests": true
+  }
+}

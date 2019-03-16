@@ -1,0 +1,48 @@
+{
+  "name": "tslint-rules-line-before-tests",
+  "version": "1.0.0",
+  "description": "Custom rules for tslint around tests.",
+  "main": "rules/index.js",
+  "scripts": {
+    "lint": "tslint -p ./tsconfig.json",
+    "test": "yarn build && tslint --test ./tests/*/*",
+    "build": "rm -rf ./rules && tsc -p tsconfig.build.json"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:omkarsheral1989/tslint-rules-line-before-tests.git"
+  },
+  "keywords": [
+    "tslint",
+    "tslint-rules",
+    "jest",
+    "jasmine",
+    "mocha",
+    "mochajs"
+  ],
+  "author": "Omkar Sheral <omkar.sheral.1989@gmail.com>",
+  "license": "MIT",
+  "homepage": "https://github.com/omkarsheral1989/tslint-rules-line-before-tests.git#readme",
+  "types": "rules/index.d.ts",
+  "dependencies": {
+    "tslib": "1.9.0",
+    "tsutils": "2.21.2"
+  },
+  "devDependencies": {
+    "@types/node": "9.4.6",
+    "tslint": "5.9.1",
+    "typescript": "2.7.2"
+  },
+  "peerDependencies": {
+    "tslint": "5.9.1"
+  },
+  "engines": {
+    "node": ">= 8"
+  },
+  "files": [
+    "/rules/**/*"
+  ],
+  "directories": {
+    "test": "tests"
+  }
+}
