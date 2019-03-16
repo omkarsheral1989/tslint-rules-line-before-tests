@@ -8,6 +8,7 @@ import {
   generateStringWithNewLineChars,
   getSnytaxKindKeyFromValue
 } from './utils';
+import { defaultOptions, incrementOptionsNumbersBy1, IOptions } from './options';
 
 
 export class Rule extends Lint.Rules.AbstractRule {
@@ -24,19 +25,24 @@ export class Rule extends Lint.Rules.AbstractRule {
     typescriptOnly: false,
   };
 
-  public static FAILURE_STRING_DESCRIBE = 'Should contain 2 blank lines before describe';
-  public static NO_OF_BLANK_LINES_BEFORE_DESCRIBE = 2 + 1;    // 1 is by default as each describe is on new lines
-
   public apply(sourceFile: ts.SourceFile): Lint.RuleFailure[] {
-    return this.applyWithFunction(sourceFile, walk);
+    return this.applyWithFunction(sourceFile, walk, this.ruleArguments);
   }
 }
 
 // https://github.com/palantir/tslint/blob/master/src/rules/newlineBeforeReturnRule.ts
 
-function walk(ctx: Lint.WalkContext<void>) {
+function walk(ctx: Lint.WalkContext<IOptions[]>) {
+  ctx.options[0] = ctx.options[0] || defaultOptions;
+  const options: IOptions = {
+    ...defaultOptions,
+    ...ctx.options[0],
+  };
+  incrementOptionsNumbersBy1(options);
 
   const sourceFile = ctx.sourceFile;
+
+  completeLog('rule args', options);
 
   return ts.forEachChild(sourceFile, function cb(node: ts.Node): void {
 
@@ -59,13 +65,15 @@ function walk(ctx: Lint.WalkContext<void>) {
           completeLog('previous node kind', getSnytaxKindKeyFromValue(previousToken.kind));
 
           let noOfNewLineChars = countNoOfNewLineChars(node.getFullText(sourceFile));
-          if (noOfNewLineChars < Rule.NO_OF_BLANK_LINES_BEFORE_DESCRIBE) {
+          console.log('no of chars', noOfNewLineChars);
+          if (noOfNewLineChars < options.beforeDescribe) {
+
             ctx.addFailureAtNode(
               node,
-              Rule.FAILURE_STRING_DESCRIBE,
-              fixAddNewLineChars(node, Rule.NO_OF_BLANK_LINES_BEFORE_DESCRIBE - noOfNewLineChars));
+              getFailureString(options.beforeDescribe),
+              fixAddNewLineChars(node, options.beforeDescribe - noOfNewLineChars));
           } else {
-            // has atleast 2 new lines before
+            // has at least 2 new lines before
           }
         } else {
           // describe() is the first thing in this file. ignore
@@ -104,4 +112,8 @@ function isXDescribeIdentifier(node: ts.Node, sourceFile: ts.SourceFile): boolea
 
 function isTOIFirstThingInFile(node: ts.Node, sourceFile: ts.SourceFile): boolean {
   return !getPreviousToken(node, sourceFile);
+}
+
+function getFailureString(noOfLines: number) {
+  return `Should contain at least ${noOfLines - 1} blank lines before describe`;
 }

@@ -1,6 +1,13 @@
 {
-  "rulesDirectory": ["../../rules"],
+  "rulesDirectory": [
+    "../../rules"
+  ],
   "rules": {
-    "line-before-tests": true
+    "line-before-tests": [
+      true,
+      {
+        "beforeDescribe": 2
+      }
+    ]
   }
 }

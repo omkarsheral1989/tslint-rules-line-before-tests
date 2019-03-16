@@ -1,11 +1,11 @@
 describe('text in desc1', () => {
 });
 describe('text in desc2', () => {
-~~~~~~~~ [Should contain 2 blank lines before describe]
+~~~~~~~~ [Should contain at least 2 blank lines before describe]
 });
 
 describe('text in desc3', () => {
-~~~~~~~~ [Should contain 2 blank lines before describe]
+~~~~~~~~ [Should contain at least 2 blank lines before describe]
 });
 
 
@@ -18,7 +18,7 @@ describe('text in desc4', () => {
 describe('text in desc5', () => {
 
   describe('d5.1', () => {
-  ~~~~~~~~ [Should contain 2 blank lines before describe]
+  ~~~~~~~~ [Should contain at least 2 blank lines before describe]
 });
 
 
@@ -30,28 +30,28 @@ describe('d6', () => {
 });
 
 describe.only('d6', () => {
-~~~~~~~~ [Should contain 2 blank lines before describe]
+~~~~~~~~ [Should contain at least 2 blank lines before describe]
 });
 
 describe.each(table)(name, fn, timeout);
-~~~~~~~~ [Should contain 2 blank lines before describe]
+~~~~~~~~ [Should contain at least 2 blank lines before describe]
 
 describe.only(name, fn);
-~~~~~~~~ [Should contain 2 blank lines before describe]
+~~~~~~~~ [Should contain at least 2 blank lines before describe]
 
 describe.only.each(table)(name, () => {
-~~~~~~~~ [Should contain 2 blank lines before describe]
+~~~~~~~~ [Should contain at least 2 blank lines before describe]
 });
 
 describe.skip(name, fn);
-~~~~~~~~ [Should contain 2 blank lines before describe]
+~~~~~~~~ [Should contain at least 2 blank lines before describe]
 
 describe.skip.each(table)(name, fn);
-~~~~~~~~ [Should contain 2 blank lines before describe]
+~~~~~~~~ [Should contain at least 2 blank lines before describe]
 
 xdescribe(name, fn);
-~~~~~~~~~ [Should contain 2 blank lines before describe]
+~~~~~~~~~ [Should contain at least 2 blank lines before describe]
 
 xdescribe(name, () => {
-~~~~~~~~~ [Should contain 2 blank lines before describe]
+~~~~~~~~~ [Should contain at least 2 blank lines before describe]
 });
